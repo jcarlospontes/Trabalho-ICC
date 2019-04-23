@@ -1,1 +1,6 @@
-Carlos - (11)11111111
+SAMU:192
+Policia:190
+Bombeiro:193
+Carlos:11111111
+Andrei:9939393
+João:33232323
