@@ -1,27 +1,50 @@
+def Adicionarlista():
+    arquivo = open("lista.txt","a")
+    nome = input("Digite o nome do contato: ")
+    numero = input("Digite o número do {}: ".format(nome))
+    arquivo.write("{}:{}\n".format(nome,numero))
+    arquivo.close()
+    print("\nContato {} Adicionado com sucesso!\n".format(nome))
+    voltar = input("Aperte ENTER para voltar")
+    return Menulista()
+
 def Visualizarlista():
 	arquivo = open("lista.txt","r")
 	i = 0
 	texto = arquivo.readlines()
 	for linha in texto:
 		i += 1
-		print("{}) {}\n".format(i, linha))
+		linha.split(":")
+		print("{}) {} - {}".format(i, linha[0],linha[1]))
 	arquivo.close()
 	voltar = input("Aperte ENTER para voltar ")
 	if voltar == "":
 		return Menulista()
 
 def Buscalista():
-	print("\nVocê deseja procurar por\n")
-	print(" 1) Nome")
-	print(" 2) Número\n")
+	print("\nBusca na lista\n")
+	nome = input("Digite o nome que deseja procurar: ")
+	print("")
+	nome = nome.lower()
+	arquivo = open("lista.txt","r")
+	texto = arquivo.readlines()
+	i = 0
+	for linha in texto:
+	    i += 1
+	    linha.split(":")
+	    nomelista = linha[0]
+	    if nomelista.lower == nome:
+	        print(" {}) {}\n".format(i,linha))
+	        break
+	arquivo.close()
+	print(" 1) Nova Busca\n")
 	print(" 0) Voltar\n")
 	escolha = int(input("Digite sua escolha: "))
-	while escolha < 0 or escolha > 2:
+	while escolha < 0 or escolha > 1:
 		print("Opção inválida!")
 		escolha = int(input("Digite sua escolha: "))
 	if escolha == 1:
-		print("")
-		nome = str(input("Digite o nome que você deseja procurar: "))
+		return Buscalista()
 	if escolha == 0:
 		return Menulista()
 		
@@ -57,5 +80,7 @@ def Menulista():
 		return 0
 	if (R == 1):
 		return Visualizarlista()
+	if (R == 2):
+	    return Adicionarlista()
 	if (R == 5):
 		return Buscalista()
