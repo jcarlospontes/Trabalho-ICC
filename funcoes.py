@@ -68,10 +68,17 @@ def EditarAgenda():
 		return EditarAgenda()
 	clear()
 	nomenovo = input("Digite um novo nome para {}: ".format(nomes[escolha-1]))
-	if nomenovo == "":
-		pass
-	else:
-		nomes[escolha-1] = nomenovo
+	while nomenovo.isalpha() == False or nomenovo == "" or nomenovo[0] == " ":
+		prov = ""
+		for a in nomenovo:
+			if (a.isalpha()) == True:
+				prov += a
+		if prov.isalpha() == True and prov != "":
+			break
+		else:
+			print("Nome inválido!\n")
+			nomenovo = input("Digite o nome do contato: ")
+	nomes[escolha-1] = nomenovo
 	numeronovo = input("Digite um novo numero para {}: ".format(nomes[escolha-1]))
 	while numeronovo.isnumeric() == False:
 		print("Apenas números!\n")
@@ -96,14 +103,12 @@ def AdicionarAgenda():
 	print("###########################\n")
 	arquivo = open("lista.txt","a")
 	nome = input("Digite o nome do contato: ")
-	while nome.isalpha == False or nome == "" or nome[0] == " ":
+	while nome.isalpha() == False or nome == "" or nome[0] == " ":
 		novonome = ""
-		x = 0
 		for a in nome:
 			if (a.isalpha()) == True:
-				x += 1
 				novonome += a
-		if novonome.isalpha() == True:
+		if novonome.isalpha() == True and novonome != "":
 			break
 		else:
 			print("Nome inválido!\n")
@@ -218,7 +223,7 @@ def BuscaAgenda():
 		return MenuAgenda()
 	else:
 		return NovabuscaAgenda()
-		
+	
 def NovabuscaAgenda():
 	clear()
 	print("  ############################")
