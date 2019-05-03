@@ -1,6 +1,4 @@
 SAMU:192
-Policia:190
-Bombeiro:193
-Carlos:11111111
-Andrei:9939393
-João:33232323
+Policia Militar:190
+Defesa Civil:199
+Corpo de Bombeiros:193
