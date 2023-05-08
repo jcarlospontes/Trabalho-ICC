@@ -156,6 +156,26 @@ class ArvoreSplay:
             self.raiz = self.raiz.esq
             if (self.raiz != None): # se raiz nao for nulo(arvore vazia) o pai da raiz sera vazio
                 self.raiz.pai = None
+        else:
+            sucessor = self.raiz.dir
+            while sucessor.esq is not None:
+                sucessor = sucessor.esq
+            if self.raiz.dir != sucessor:
+                sucessor.pai.esq = sucessor.dir
+                if sucessor.dir is not None:
+                    sucessor.dir.pai = sucessor.pai
+                sucessor.dir = self.raiz.dir
+                self.raiz.dir.pai = sucessor
+            sucessor.esq = self.raiz.esq
+            self.raiz.esq.pai = sucessor
+            pai = self.raiz.pai
+            if pai is None:
+                self.raiz = sucessor
+            elif self.raiz == pai.esq:
+                pai.esq = sucessor
+            else:
+                pai.dir = sucessor
+            sucessor.pai = pai
 
 
     def pre_ordem(self, no):
