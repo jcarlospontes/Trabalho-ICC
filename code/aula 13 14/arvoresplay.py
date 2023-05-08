@@ -62,7 +62,7 @@ class ArvoreSplay:
                     return False
                 atual = atual.dir
 
-
+    #item c
     def insere(self, valor):
         no_insere = No(valor)
         if (self.raiz == None):
@@ -141,7 +141,7 @@ class ArvoreSplay:
             return atual
     
 
-
+    #item d
     def remove(self, valor):
         if (self.raiz == None):
             return
@@ -156,7 +156,26 @@ class ArvoreSplay:
             self.raiz = self.raiz.esq
             if (self.raiz != None): # se raiz nao for nulo(arvore vazia) o pai da raiz sera vazio
                 self.raiz.pai = None
-
+        else:
+            sucessor = self.raiz.dir
+            while sucessor.esq is not None:
+                sucessor = sucessor.esq
+            if self.raiz.dir != sucessor:
+                sucessor.pai.esq = sucessor.dir
+                if sucessor.dir is not None:
+                    sucessor.dir.pai = sucessor.pai
+                sucessor.dir = self.raiz.dir
+                self.raiz.dir.pai = sucessor
+            sucessor.esq = self.raiz.esq
+            self.raiz.esq.pai = sucessor
+            pai = self.raiz.pai
+            if pai is None:
+                self.raiz = sucessor
+            elif self.raiz == pai.esq:
+                pai.esq = sucessor
+            else:
+                pai.dir = sucessor
+            sucessor.pai = pai
 
     def pre_ordem(self, no):
         if no:
@@ -232,4 +251,41 @@ arvore.pre_ordem(arvore.raiz)
 print("\n\nbuscando 14")
 arvore.busca(14)
 print("\narvore buscado 14")
+arvore.pre_ordem(arvore.raiz)
+
+
+arvore.remove(14)
+arvore.remove(4)
+arvore.remove(15)
+arvore.remove(18)
+arvore.remove(20)
+arvore.remove(16)
+arvore.remove(17)
+arvore.remove(3)
+arvore.remove(9)
+arvore.remove(7)
+arvore.remove(5)
+
+#questao2
+#item a
+print("\Inserindo valores do item a")
+arvore.insere(40)
+arvore.insere(30)
+arvore.insere(15)
+arvore.insere(50)
+arvore.insere(45)
+arvore.insere(13)
+arvore.insere(80)
+arvore.insere(71)
+arvore.insere(20)
+print("\narvore apos insercoes")
+arvore.pre_ordem(arvore.raiz)
+print("\n\n\n\n")
+#item b
+print("\nRemovendo valores do item b")
+arvore.remove(50)
+arvore.remove(30)
+arvore.remove(13)
+arvore.remove(71)
+print("\narvore apos remocoes")
 arvore.pre_ordem(arvore.raiz)
